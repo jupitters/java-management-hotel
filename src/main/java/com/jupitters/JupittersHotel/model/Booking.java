@@ -20,4 +20,10 @@ public class Booking {
     private int numOfAdults;
     private int numOfChildren;
     private int totalNumOfGuests;
+    private String bookingConfirmationCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+    private Room room;
+
 }
