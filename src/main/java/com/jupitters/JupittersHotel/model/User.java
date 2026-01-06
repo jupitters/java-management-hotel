@@ -19,7 +19,9 @@ public class User {
     @NotBlank(message = "Email is required")
     @Column(unique = true)
     private String email;
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "Phone Number is required")
     private String phoneNumber;
     private String password;
     private String role;
