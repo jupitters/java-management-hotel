@@ -37,4 +37,30 @@ public class Booking {
     @JoinColumn(name = "room_id")
     private Room room;
 
+    public void calculateNumberOfGuests(){
+        this.totalNumOfGuests = this.numOfAdults + this.numOfChildren;
+    }
+
+    public void setNumOfAdults(int numOfAdults) {
+        this.numOfAdults = numOfAdults;
+        calculateNumberOfGuests();
+    }
+
+    public void setNumOfChildren(int numOfChildren) {
+        this.numOfChildren = numOfChildren;
+        calculateNumberOfGuests();
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", numOfAdults=" + numOfAdults +
+                ", numOfChildren=" + numOfChildren +
+                ", totalNumOfGuests=" + totalNumOfGuests +
+                ", bookingConfirmationCode='" + bookingConfirmationCode + '\'' +
+                '}';
+    }
 }
