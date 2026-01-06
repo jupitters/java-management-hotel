@@ -27,6 +27,7 @@ public class User implements UserDetails {
     private String name;
     @NotBlank(message = "Phone Number is required")
     private String phoneNumber;
+    @NotBlank(message = "Password is required")
     private String password;
     private String role;
     private List<Booking> bookings = new ArrayList<>();
