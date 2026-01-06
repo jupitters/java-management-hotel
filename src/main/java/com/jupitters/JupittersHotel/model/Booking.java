@@ -1,6 +1,9 @@
 package com.jupitters.JupittersHotel.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -14,10 +17,14 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Check in date is required")
     private LocalDate checkInDate;
+    @Future(message = "Check out date must be after check in")
     private LocalDate checkOutDate;
 
+    @Min(message = "Must be at least one adult", value = 1)
     private int numOfAdults;
+    @Min(message = "Invalid number of children.", value = 0)
     private int numOfChildren;
     private int totalNumOfGuests;
     private String bookingConfirmationCode;
