@@ -22,4 +22,16 @@ public class Room {
     private String roomPhotoUrl;
     private String roomDescription;
     private List<Booking> bookings = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", bookingConfirmationCode='" + bookingConfirmationCode + '\'' +
+                ", roomType='" + roomType + '\'' +
+                ", roomPrice=" + roomPrice +
+                ", roomPhotoUrl='" + roomPhotoUrl + '\'' +
+                ", roomDescription='" + roomDescription + '\'' +
+                '}';
+    }
 }
