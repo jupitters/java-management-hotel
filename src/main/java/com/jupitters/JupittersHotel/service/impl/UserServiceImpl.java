@@ -3,6 +3,7 @@ package com.jupitters.JupittersHotel.service.impl;
 import com.jupitters.JupittersHotel.dto.LoginRequest;
 import com.jupitters.JupittersHotel.dto.Response;
 import com.jupitters.JupittersHotel.dto.UserDto;
+import com.jupitters.JupittersHotel.exception.ResourceNotFoundException;
 import com.jupitters.JupittersHotel.model.User;
 import com.jupitters.JupittersHotel.repo.UserRepository;
 import com.jupitters.JupittersHotel.service.UserService;
@@ -11,6 +12,8 @@ import com.jupitters.JupittersHotel.utils.Utils;
 import io.jsonwebtoken.security.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +52,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response login(LoginRequest loginRequest) {
-        return null;
+        Response response = new Response();
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            User user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            String token = jwtUtils.generateToken(user);
+            response.setStatusCode(200);
+            response.setToken(token);
+            response.setRole(user.getRole());
+            response.setExpirationTime("7 days");
+            response.setMessage("Login successful!");
+
+        }catch(Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
     @Override
