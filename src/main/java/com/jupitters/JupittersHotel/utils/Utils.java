@@ -2,10 +2,12 @@ package com.jupitters.JupittersHotel.utils;
 
 import com.jupitters.JupittersHotel.dto.RoomDto;
 import com.jupitters.JupittersHotel.dto.UserDto;
+import com.jupitters.JupittersHotel.model.Booking;
 import com.jupitters.JupittersHotel.model.Room;
 import com.jupitters.JupittersHotel.model.User;
 
 import java.security.SecureRandom;
+import java.util.stream.Collectors;
 
 public class Utils {
     private static final String ALPHANUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -49,6 +51,14 @@ public class Utils {
         roomDto.setRoomType(room.getRoomType());
         roomDto.setRoomPrice(room.getRoomPrice());
         roomDto.setRoomPhotoUrl(room.getRoomPhotoUrl());
+
+        if(room.getBookings() != null){
+            roomDto.setBookings(room.getBookings()
+                    .stream()
+                    .map(Utils::mapBookingsEntityToDto)
+                    .collect(Collectors.toList()));
+        }
+
         return roomDto;
     }
 
