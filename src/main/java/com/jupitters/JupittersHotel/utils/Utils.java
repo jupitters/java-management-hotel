@@ -2,6 +2,7 @@ package com.jupitters.JupittersHotel.utils;
 
 import com.jupitters.JupittersHotel.dto.RoomDto;
 import com.jupitters.JupittersHotel.dto.UserDto;
+import com.jupitters.JupittersHotel.model.Room;
 import com.jupitters.JupittersHotel.model.User;
 
 import java.security.SecureRandom;
@@ -31,18 +32,27 @@ public class Utils {
         return userDto;
     }
 
-    public static RoomDto mapUserEntityToDto(User user) {
-        UserDto userDto = new UserDto();
+    public static RoomDto mapRoomEntityToDto(Room room) {
+        RoomDto roomDto = new RoomDto();
 
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setEmail(user.getEmail());
-        userDto.setPhoneNumber(user.getPhoneNumber());
-        userDto.setRole(user.getRole());
-        return userDto;
+        roomDto.setId(room.getId());
+        roomDto.setRoomType(room.getRoomType());
+        roomDto.setRoomPrice(room.getRoomPrice());
+        roomDto.setRoomPhotoUrl(room.getRoomPhotoUrl());
+        return roomDto;
     }
 
-    public static UserDto mapUserEntitytoDtoBookingsAndRooms(User user) {
+    public static RoomDto mapRoomEntityToDtoAndBookings(Room room) {
+        RoomDto roomDto = new RoomDto();
+
+        roomDto.setId(room.getId());
+        roomDto.setRoomType(room.getRoomType());
+        roomDto.setRoomPrice(room.getRoomPrice());
+        roomDto.setRoomPhotoUrl(room.getRoomPhotoUrl());
+        return roomDto;
+    }
+
+    public static UserDto mapUserEntityToDtoBookingsAndRooms(User user) {
         UserDto userDto = new UserDto();
 
         userDto.setId(user.getId());
