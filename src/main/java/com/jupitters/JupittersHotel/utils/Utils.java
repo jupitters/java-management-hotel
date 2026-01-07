@@ -1,5 +1,6 @@
 package com.jupitters.JupittersHotel.utils;
 
+import com.jupitters.JupittersHotel.dto.BookingDto;
 import com.jupitters.JupittersHotel.dto.RoomDto;
 import com.jupitters.JupittersHotel.dto.UserDto;
 import com.jupitters.JupittersHotel.model.Booking;
@@ -41,7 +42,21 @@ public class Utils {
         roomDto.setRoomType(room.getRoomType());
         roomDto.setRoomPrice(room.getRoomPrice());
         roomDto.setRoomPhotoUrl(room.getRoomPhotoUrl());
+        roomDto.setRoomDescription(room.getRoomDescription());
         return roomDto;
+    }
+
+    public static BookingDto mapBookingsEntityToDto(Booking booking) {
+        BookingDto bookingDto = new BookingDto();
+
+        bookingDto.setId(booking.getId());
+        bookingDto.setCheckInDate(booking.getCheckInDate());
+        bookingDto.setCheckOutDate(booking.getCheckOutDate());
+        bookingDto.setNumOfAdults(booking.getNumOfAdults());
+        bookingDto.setNumOfChildren(booking.getNumOfChildren());
+        bookingDto.setTotalNumOfGuests(booking.getTotalNumOfGuests());
+        bookingDto.setBookingConfirmationCode(booking.getBookingConfirmationCode());
+        return bookingDto;
     }
 
     public static RoomDto mapRoomEntityToDtoAndBookings(Room room) {
@@ -74,9 +89,36 @@ public class Utils {
         if(!user.getBookings().isEmpty()) {
             userDto.setBookings(user.getBookings()
                     .stream()
-                    .map(booking -> mapBookingEntitytoBookingDtoAndBookedRoom(booking, false)));
+                    .map(booking -> mapBookingEntitytoBookingDtoAndBookedRoom(booking, false)).toList());
         }
         return userDto;
+    }
+
+    public static BookingDto mapBookingEntitytoBookingDtoAndBookedRoom(Booking booking, boolean mapUser){
+        BookingDto bookingDto = new BookingDto();
+
+        bookingDto.setId(booking.getId());
+        bookingDto.setCheckInDate(booking.getCheckInDate());
+        bookingDto.setCheckOutDate(booking.getCheckOutDate());
+        bookingDto.setNumOfAdults(booking.getNumOfAdults());
+        bookingDto.setNumOfChildren(booking.getNumOfChildren());
+        bookingDto.setTotalNumOfGuests(booking.getTotalNumOfGuests());
+        bookingDto.setBookingConfirmationCode(booking.getBookingConfirmationCode());
+
+        if(mapUser){
+            bookingDto.setUser(Utils.mapUserEntityToDto(booking.getUser()));
+        }
+        if(booking.getRoom() != null){
+            RoomDto roomDto = new RoomDto();
+
+            roomDto.setId(booking.getRoom().getId());
+            roomDto.setRoomType(booking.getRoom().getRoomType());
+            roomDto.setRoomPrice(booking.getRoom().getRoomPrice());
+            roomDto.setRoomPhotoUrl(booking.getRoom().getRoomPhotoUrl());
+            roomDto.setRoomDescription(booking.getRoom().getRoomDescription());
+            bookingDto.setRoom(roomDto);
+        }
+        return bookingDto;
     }
 
 }
