@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
     public Response deleteUser(Long userId) {
         Response response = new Response();
         try{
-            User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
             userRepository.deleteById(userId);
             response.setStatusCode(200);
             response.setMessage("Deleted successfully");
@@ -123,11 +123,11 @@ public class UserServiceImpl implements UserService {
     public Response getUserById(Long userId) {
         Response response = new Response();
         try{
-            List<User> users = userRepository.findAll();
-            List<UserDto> usersDto = Utils.mapUserListToDto(users);
+            User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            UserDto userDto = Utils.mapUserEntityToDto(user);
             response.setStatusCode(200);
-            response.setMessage("Users found!");
-            response.setUserList(usersDto);
+            response.setMessage("User found!");
+            response.setUser(userDto);
         }catch(Exception e){
             response.setStatusCode(500);
             response.setMessage(e.getMessage());
@@ -136,14 +136,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Response getMyInfo(Long userId) {
+    public Response getMyInfo(String email) {
         Response response = new Response();
         try{
-            List<User> users = userRepository.findAll();
-            List<UserDto> usersDto = Utils.mapUserListToDto(users);
+            User user = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            UserDto userDto = Utils.mapUserEntityToDto(user);
             response.setStatusCode(200);
-            response.setMessage("Users found!");
-            response.setUserList(usersDto);
+            response.setMessage("User found!");
+            response.setUser(userDto);
         }catch(Exception e){
             response.setStatusCode(500);
             response.setMessage(e.getMessage());

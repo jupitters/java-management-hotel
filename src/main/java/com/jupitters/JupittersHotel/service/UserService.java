@@ -11,5 +11,5 @@ public interface UserService {
     Response getUserBookingHistory(Long userId);
     Response deleteUser(Long userId);
     Response getUserById(Long userId);
-    Response getMyInfo(Long userId);
+    Response getMyInfo(String email);
 }
