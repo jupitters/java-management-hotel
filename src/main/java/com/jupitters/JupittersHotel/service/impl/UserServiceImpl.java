@@ -109,10 +109,9 @@ public class UserServiceImpl implements UserService {
         Response response = new Response();
         try{
             User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-            UserDto userDto = Utils.mapUserEntityToDtoBookingsAndRooms(user);
+            userRepository.deleteById(userId);
             response.setStatusCode(200);
-            response.setMessage("Bookings found!");
-            response.setUser(userDto);
+            response.setMessage("Deleted successfully");
         }catch(Exception e){
             response.setStatusCode(500);
             response.setMessage(e.getMessage());
