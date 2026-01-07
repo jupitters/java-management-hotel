@@ -8,6 +8,7 @@ import com.jupitters.JupittersHotel.model.Room;
 import com.jupitters.JupittersHotel.model.User;
 
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -89,7 +90,7 @@ public class Utils {
         if(!user.getBookings().isEmpty()) {
             userDto.setBookings(user.getBookings()
                     .stream()
-                    .map(booking -> mapBookingEntitytoBookingDtoAndBookedRoom(booking, false)).toList());
+                    .map(booking -> mapBookingEntitytoBookingDtoAndBookedRoom(booking, false)).collect(Collectors.toList()));
         }
         return userDto;
     }
@@ -119,6 +120,10 @@ public class Utils {
             bookingDto.setRoom(roomDto);
         }
         return bookingDto;
+    }
+
+    public static List<UserDto> mapUserListToDto(List<User> users) {
+        return users.stream().map(Utils::mapUserEntityToDto).collect(Collectors.toList());
     }
 
 }
