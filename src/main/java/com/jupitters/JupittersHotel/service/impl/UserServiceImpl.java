@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -72,7 +74,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response getAllUsers() {
-        return null;
+        Response response = new Response();
+        try{
+            List<User> users = userRepository.findAll();
+            List<UserDto> usersDto = Utils.mapUserListToDto(users);
+            response.setStatusCode(200);
+            response.setMessage("Users found!");
+            response.setUserList(usersDto);
+        }catch(Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
     @Override
