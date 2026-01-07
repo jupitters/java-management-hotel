@@ -47,7 +47,7 @@ public class Utils {
         return roomDto;
     }
 
-    public static BookingDto mapBookingsEntityToDto(Booking booking) {
+    public static BookingDto mapBookingEntityToDto(Booking booking) {
         BookingDto bookingDto = new BookingDto();
 
         bookingDto.setId(booking.getId());
@@ -71,7 +71,7 @@ public class Utils {
         if(room.getBookings() != null){
             roomDto.setBookings(room.getBookings()
                     .stream()
-                    .map(Utils::mapBookingsEntityToDto)
+                    .map(Utils::mapBookingEntityToDto)
                     .collect(Collectors.toList()));
         }
 
@@ -90,12 +90,12 @@ public class Utils {
         if(!user.getBookings().isEmpty()) {
             userDto.setBookings(user.getBookings()
                     .stream()
-                    .map(booking -> mapBookingEntitytoBookingDtoAndBookedRoom(booking, false)).collect(Collectors.toList()));
+                    .map(booking -> mapBookingEntityToBookingDtoAndBookedRoom(booking, false)).collect(Collectors.toList()));
         }
         return userDto;
     }
 
-    public static BookingDto mapBookingEntitytoBookingDtoAndBookedRoom(Booking booking, boolean mapUser){
+    public static BookingDto mapBookingEntityToBookingDtoAndBookedRoom(Booking booking, boolean mapUser){
         BookingDto bookingDto = new BookingDto();
 
         bookingDto.setId(booking.getId());
@@ -124,6 +124,14 @@ public class Utils {
 
     public static List<UserDto> mapUserListToDto(List<User> users) {
         return users.stream().map(Utils::mapUserEntityToDto).collect(Collectors.toList());
+    }
+
+    public static List<RoomDto> mapRoomListToDto(List<Room> rooms) {
+        return rooms.stream().map(Utils::mapRoomEntityToDto).collect(Collectors.toList());
+    }
+
+    public static List<BookingDto> mapBookingListToDto(List<Booking> bookings) {
+        return bookings.stream().map(Utils::mapBookingEntityToDto).collect(Collectors.toList());
     }
 
 }
