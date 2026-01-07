@@ -1,5 +1,8 @@
 package com.jupitters.JupittersHotel.utils;
 
+import com.jupitters.JupittersHotel.dto.UserDto;
+import com.jupitters.JupittersHotel.model.User;
+
 import java.security.SecureRandom;
 
 public class Utils {
@@ -14,5 +17,16 @@ public class Utils {
             sb.append(randomChar);
         }
         return sb.toString();
+    }
+
+    public static UserDto mapUserEntitytoDto(User user) {
+        UserDto userDto = new UserDto();
+
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setPhoneNumber(user.getPhoneNumber());
+        userDto.setRole(user.getRole());
+        return new UserDto();
     }
 }
