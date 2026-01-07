@@ -46,4 +46,13 @@ public class JWTUtils {
                 .parseSignedClaims(token)
                 .getPayload());
     }
+
+    public boolean isValidToken(String token, UserDetails userDetails){
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokeExpired(token));
+    }
+
+    private boolean isTokeExpired(String token) {
+        return extractClaims(token, Claims::getExpiration).before(new Date());
+    }
 }
