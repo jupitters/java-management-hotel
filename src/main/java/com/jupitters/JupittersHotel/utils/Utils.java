@@ -1,5 +1,6 @@
 package com.jupitters.JupittersHotel.utils;
 
+import com.jupitters.JupittersHotel.dto.RoomDto;
 import com.jupitters.JupittersHotel.dto.UserDto;
 import com.jupitters.JupittersHotel.model.User;
 
@@ -19,7 +20,7 @@ public class Utils {
         return sb.toString();
     }
 
-    public static UserDto mapUserEntitytoDto(User user) {
+    public static UserDto mapUserEntityToDto(User user) {
         UserDto userDto = new UserDto();
 
         userDto.setId(user.getId());
@@ -27,6 +28,35 @@ public class Utils {
         userDto.setEmail(user.getEmail());
         userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setRole(user.getRole());
-        return new UserDto();
+        return userDto;
     }
+
+    public static RoomDto mapUserEntityToDto(User user) {
+        UserDto userDto = new UserDto();
+
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setPhoneNumber(user.getPhoneNumber());
+        userDto.setRole(user.getRole());
+        return userDto;
+    }
+
+    public static UserDto mapUserEntitytoDtoBookingsAndRooms(User user) {
+        UserDto userDto = new UserDto();
+
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setPhoneNumber(user.getPhoneNumber());
+        userDto.setRole(user.getRole());
+
+        if(!user.getBookings().isEmpty()) {
+            userDto.setBookings(user.getBookings()
+                    .stream()
+                    .map(booking -> mapBookingEntitytoBookingDtoAndBookedRoom(booking, false)));
+        }
+        return userDto;
+    }
+
 }
