@@ -90,21 +90,65 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response getUserBookingHistory(Long userId) {
-        return null;
+        Response response = new Response();
+        try{
+            User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            UserDto userDto = Utils.mapUserEntityToDtoBookingsAndRooms(user);
+            response.setStatusCode(200);
+            response.setMessage("Bookings found!");
+            response.setUser(userDto);
+        }catch(Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
     @Override
     public Response deleteUser(Long userId) {
-        return null;
+        Response response = new Response();
+        try{
+            User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+            UserDto userDto = Utils.mapUserEntityToDtoBookingsAndRooms(user);
+            response.setStatusCode(200);
+            response.setMessage("Bookings found!");
+            response.setUser(userDto);
+        }catch(Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
     @Override
     public Response getUserById(Long userId) {
-        return null;
+        Response response = new Response();
+        try{
+            List<User> users = userRepository.findAll();
+            List<UserDto> usersDto = Utils.mapUserListToDto(users);
+            response.setStatusCode(200);
+            response.setMessage("Users found!");
+            response.setUserList(usersDto);
+        }catch(Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 
     @Override
     public Response getMyInfo(Long userId) {
-        return null;
+        Response response = new Response();
+        try{
+            List<User> users = userRepository.findAll();
+            List<UserDto> usersDto = Utils.mapUserListToDto(users);
+            response.setStatusCode(200);
+            response.setMessage("Users found!");
+            response.setUserList(usersDto);
+        }catch(Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+        return response;
     }
 }
