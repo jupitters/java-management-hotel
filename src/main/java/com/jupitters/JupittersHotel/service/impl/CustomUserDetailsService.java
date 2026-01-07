@@ -1,5 +1,6 @@
 package com.jupitters.JupittersHotel.service.impl;
 
+import com.jupitters.JupittersHotel.exception.ResourceNotFoundException;
 import com.jupitters.JupittersHotel.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
