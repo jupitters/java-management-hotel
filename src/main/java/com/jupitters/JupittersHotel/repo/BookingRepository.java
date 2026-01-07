@@ -3,5 +3,10 @@ package com.jupitters.JupittersHotel.repo;
 import com.jupitters.JupittersHotel.model.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BookingRepository extends JpaRepository<Long, Booking> {
+import java.util.List;
+
+public interface BookingRepository extends JpaRepository<Booking, Long> {
+    List<Booking> findByRoomId(Long roomId);
+    List<Booking> findByBookingConfirmationCode(String bookingConfirmationCode);
+    List<Booking> findByUserId(Long userId);
 }
