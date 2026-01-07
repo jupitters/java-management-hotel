@@ -1,4 +1,4 @@
-package com.jupitters.JupittersHotel.service.impl;
+package com.jupitters.JupittersHotel.service;
 
 import com.jupitters.JupittersHotel.dto.LoginRequest;
 import com.jupitters.JupittersHotel.dto.Response;
