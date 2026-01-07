@@ -5,7 +5,7 @@ import com.jupitters.JupittersHotel.dto.Response;
 import com.jupitters.JupittersHotel.model.User;
 
 public interface UserService {
-    Response register(User loginRequest);
+    Response register(User user);
     Response login(LoginRequest loginRequest);
     Response getAllUsers();
     Response getUserBookingHistory(Long userId);
