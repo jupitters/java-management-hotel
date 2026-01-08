@@ -122,7 +122,7 @@ public class RoomServiceImpl implements RoomService {
         Response response = new Response();
 
         try{
-            Room room = roomRepository.findById(roomId).orElseThrow(() -> new ResourceNotFoundException("Room not found");
+            Room room = roomRepository.findById(roomId).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
             RoomDto roomDto = Utils.mapRoomEntityToDtoAndBookings(room);
 
             response.setStatusCode(200);
@@ -157,6 +157,20 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response getAllAvailableRooms() {
-        return null;
+        Response response = new Response();
+
+        try{
+            List<Room> roomsAvailable = roomRepository.getAllAvailableRooms();
+            List<RoomDto> roomsDto = Utils.mapRoomListToDto(roomsAvailable);
+
+            response.setStatusCode(200);
+            response.setMessage("Deleted Successfully!");
+            response.setRoomList(roomsDto);
+        }catch (Exception e) {
+            response.setStatusCode(500);
+            response.setMessage("Error adding room: " + e.getMessage());
+        }
+
+        return response;
     }
 }
