@@ -49,7 +49,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<String> getAllRoomTypes() {
-        return List.of();
+            return roomRepository.findDistinctRoomTypes();
     }
 
     @Override
