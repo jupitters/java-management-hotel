@@ -12,7 +12,7 @@ public interface RoomService {
     List<String> getAllRoomTypes();
     Response getAllRooms();
     Response deleteRoom(Long roomId);
-    Response updateRoom(Long roomId, String roomType, BigDecimal roomprice, MultipartFile photo);
+    Response updateRoom(Long roomId, String description, String roomType, BigDecimal roomprice, MultipartFile photo);
     Response getRoomById(Long roomId);
     Response getAvailableRoomsByDateAndType(LocalDate checkInDate, LocalDate checkOutDate, String roomType);
     Response getAllAvailableRooms();

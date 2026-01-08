@@ -89,8 +89,32 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Response updateRoom(Long roomId, String roomType, BigDecimal roomprice, MultipartFile photo) {
-        return null;
+    public Response updateRoom(Long roomId, String description, String roomType, BigDecimal roomPrice, MultipartFile photo) {
+        Response response = new Response();
+
+        try{
+            String imageUrl = null;
+//            if(photo != null && !photo.isEmpty()){
+//                imageUrl = awsS3Service.saveImageToS3(photo);
+//            }
+            Room room = roomRepository.findById(roomId).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
+            if(roomType != null) room.setRoomType(roomType);
+            if(roomPrice != null) room.setRoomPrice(roomPrice);
+            if(description != null) room.setRoomDescription(description);
+            if(imageUrl != null) room.setRoomPhotoUrl(imageUrl);
+
+            Room updatedRoom = roomRepository.save(room);
+            RoomDto roomDto = Utils.mapRoomEntityToDto(updatedRoom);
+
+            response.setStatusCode(200);
+            response.setMessage("Deleted Successfully!");
+            response.setRoom(roomDto);
+        }catch (Exception e) {
+            response.setStatusCode(500);
+            response.setMessage("Error adding room: " + e.getMessage());
+        }
+
+        return response;
     }
 
     @Override
