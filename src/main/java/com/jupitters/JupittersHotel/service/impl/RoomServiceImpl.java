@@ -138,7 +138,21 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response getAvailableRoomsByDateAndType(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
-        return null;
+        Response response = new Response();
+
+        try{
+            List<Room> roomsAvailable = roomRepository.findAvailableRoomsByDatesAndTypes(checkInDate, checkOutDate, roomType);
+            List<RoomDto> roomsDto = Utils.mapRoomListToDto(roomsAvailable);
+
+            response.setStatusCode(200);
+            response.setMessage("Deleted Successfully!");
+            response.setRoomList(roomsDto);
+        }catch (Exception e) {
+            response.setStatusCode(500);
+            response.setMessage("Error adding room: " + e.getMessage());
+        }
+
+        return response;
     }
 
     @Override
