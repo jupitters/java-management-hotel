@@ -37,12 +37,14 @@ public class RoomServiceImpl implements RoomService {
             room.setRoomDescription(description);
             Room savedRoom = roomRepository.save(room);
             RoomDto roomDto = Utils.mapRoomEntityToDto(savedRoom);
+            response.setStatusCode(201);
+            response.setRoom(roomDto);
         }catch (Exception e){
             response.setStatusCode(500);
             response.setMessage("Error adding room: " + e.getMessage());
         }
 
-        return null;
+        return response;
     }
 
     @Override
