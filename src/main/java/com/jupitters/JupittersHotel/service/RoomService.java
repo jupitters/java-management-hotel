@@ -1,4 +1,4 @@
 package com.jupitters.JupittersHotel.service;
 
-public class RoomService {
+public interface RoomService {
 }

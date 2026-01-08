@@ -1,4 +1,6 @@
 package com.jupitters.JupittersHotel.service.impl;
 
-public class RoomServiceImpl {
+import com.jupitters.JupittersHotel.service.RoomService;
+
+public class RoomServiceImpl implements RoomService {
 }
