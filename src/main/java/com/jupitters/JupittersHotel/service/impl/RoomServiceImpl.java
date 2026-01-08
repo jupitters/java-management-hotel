@@ -8,6 +8,7 @@ import com.jupitters.JupittersHotel.repo.RoomRepository;
 import com.jupitters.JupittersHotel.service.RoomService;
 import com.jupitters.JupittersHotel.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,7 +55,19 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response getAllRooms() {
-        return null;
+        Response response = new Response();
+
+        try{
+            List<Room> rooms = roomRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+            List<RoomDto> roomsDto = Utils.mapRoomListToDto(rooms);
+            response.setStatusCode(200);
+            response.setRoomList(roomsDto);
+        }catch (Exception e) {
+            response.setStatusCode(500);
+            response.setMessage("Error adding room: " + e.getMessage());
+        }
+
+        return response;
     }
 
     @Override
