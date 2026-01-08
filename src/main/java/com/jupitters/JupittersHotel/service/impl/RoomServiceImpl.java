@@ -2,6 +2,7 @@ package com.jupitters.JupittersHotel.service.impl;
 
 import com.jupitters.JupittersHotel.dto.Response;
 import com.jupitters.JupittersHotel.dto.RoomDto;
+import com.jupitters.JupittersHotel.exception.ResourceNotFoundException;
 import com.jupitters.JupittersHotel.model.Room;
 import com.jupitters.JupittersHotel.repo.BookingRepository;
 import com.jupitters.JupittersHotel.repo.RoomRepository;
@@ -72,7 +73,19 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response deleteRoom(Long roomId) {
-        return null;
+        Response response = new Response();
+
+        try{
+            roomRepository.findById(roomId).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
+            roomRepository.deleteById(roomId);
+            response.setStatusCode(200);
+            response.setMessage("Deleted Successfully!");
+        }catch (Exception e) {
+            response.setStatusCode(500);
+            response.setMessage("Error adding room: " + e.getMessage());
+        }
+
+        return response;
     }
 
     @Override
