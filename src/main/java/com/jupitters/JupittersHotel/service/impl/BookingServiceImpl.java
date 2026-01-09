@@ -10,6 +10,7 @@ import com.jupitters.JupittersHotel.repo.RoomRepository;
 import com.jupitters.JupittersHotel.repo.UserRepository;
 import com.jupitters.JupittersHotel.service.BookingService;
 import com.jupitters.JupittersHotel.service.RoomService;
+import com.jupitters.JupittersHotel.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,12 +41,36 @@ public class BookingServiceImpl implements BookingService {
             if(!roomIsAvailable(bookingRequest, existingBookings)){
                 throw new RuntimeException("Room is not available");
             }
+
+            bookingRequest.setRoom(room);
+            bookingRequest.setUser(user);
+            String bookingConfirmation = Utils.generateRandomAlphanumeric(10);
+            bookingRequest.setBookingConfirmationCode(bookingConfirmation);
+            response.setStatusCode(200);
+            response.setBookingConfirmationCode(bookingConfirmation);
             
         }catch (Exception e){
 
         }
 
         return response;
+    }
+
+
+
+    @Override
+    public Response findBookingByConfirmationCode(String confirmationCode) {
+        return null;
+    }
+
+    @Override
+    public Response getAllBookings() {
+        return null;
+    }
+
+    @Override
+    public Response cancelBooking(Long bookingId) {
+        return null;
     }
 
     private boolean roomIsAvailable(Booking bookingRequest, List<Booking> existingBookings) {
@@ -68,20 +93,5 @@ public class BookingServiceImpl implements BookingService {
                                 || (bookingRequest.getCheckInDate().equals(existingBooking.getCheckOutDate())
                                 && bookingRequest.getCheckOutDate().equals(bookingRequest.getCheckInDate()))
                 );
-    }
-
-    @Override
-    public Response findBookingByConfirmationCode(String confirmationCode) {
-        return null;
-    }
-
-    @Override
-    public Response getAllBookings() {
-        return null;
-    }
-
-    @Override
-    public Response cancelBooking(Long bookingId) {
-        return null;
     }
 }
