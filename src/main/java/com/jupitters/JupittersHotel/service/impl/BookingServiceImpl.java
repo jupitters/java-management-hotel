@@ -83,7 +83,7 @@ public class BookingServiceImpl implements BookingService {
         Response response = new Response();
 
         try {
-            List<Booking> bookings = bookingRepository.findAll(Sort.by(Sort.Direction.DESC));
+            List<Booking> bookings = bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
             List<BookingDto> bookingsDto = Utils.mapBookingListToDto(bookings);
             response.setStatusCode(200);
             response.setBookingList(bookingsDto);
