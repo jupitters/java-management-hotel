@@ -37,4 +37,10 @@ public class RoomController {
         Response response = roomService.addNewRoom(photo, roomType, roomPrice, roomDescription);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<Response> getAllRooms() {
+        Response response = roomService.getAllRooms();
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 }
