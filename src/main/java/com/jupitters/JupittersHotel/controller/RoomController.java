@@ -49,4 +49,10 @@ public class RoomController {
     public List<String> getRoomTypes() {
         return roomService.getAllRoomTypes();
     }
+
+    @GetMapping("/{roomId}/id")
+    public ResponseEntity<Response> getRoomById(@PathVariable Long roomId) {
+        Response response = roomService.getRoomById(roomId);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 }
