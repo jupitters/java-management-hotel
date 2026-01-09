@@ -50,7 +50,8 @@ public class BookingServiceImpl implements BookingService {
             response.setBookingConfirmationCode(bookingConfirmation);
             
         }catch (Exception e){
-
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
         }
 
         return response;
@@ -60,7 +61,18 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Response findBookingByConfirmationCode(String confirmationCode) {
-        return null;
+        Response response = new Response();
+
+        try {
+            Booking booking = bookingRepository.findByBookingConfirmationCode(confirmationCode);
+            response.setStatusCode(200);
+            response.setBookingConfirmationCode(bookingConfirmation);
+        }catch (Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+
+        return response;
     }
 
     @Override
