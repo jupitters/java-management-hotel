@@ -101,9 +101,9 @@ public class BookingServiceImpl implements BookingService {
 
         try {
             bookingRepository.findById(bookingId).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
-            bookingRepository.delete(bookingId);
+            bookingRepository.deleteById(bookingId);
             response.setStatusCode(200);
-            response.setBooking(bookingDto);
+            response.setMessage("Deleted successfully");
         }catch (Exception e){
             response.setStatusCode(500);
             response.setMessage(e.getMessage());
