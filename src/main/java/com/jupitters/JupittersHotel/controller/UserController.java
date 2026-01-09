@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
-    @DeleteMapping("/{userId}/id/info")
+    @GetMapping("/{userId}/id/info")
     public ResponseEntity<Response> getProfileInfo(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
