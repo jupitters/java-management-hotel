@@ -13,6 +13,7 @@ import com.jupitters.JupittersHotel.service.BookingService;
 import com.jupitters.JupittersHotel.service.RoomService;
 import com.jupitters.JupittersHotel.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,7 +83,7 @@ public class BookingServiceImpl implements BookingService {
         Response response = new Response();
 
         try {
-            List<Booking> bookings = bookingRepository.findAll();
+            List<Booking> bookings = bookingRepository.findAll(Sort.by(Sort.Direction.DESC));
             List<BookingDto> bookingsDto = Utils.mapBookingListToDto(bookings);
             response.setStatusCode(200);
             response.setBookingList(bookingsDto);
@@ -96,7 +97,19 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Response cancelBooking(Long bookingId) {
-        return null;
+        Response response = new Response();
+
+        try {
+            bookingRepository.findById(bookingId).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
+            bookingRepository.delete(bookingId);
+            response.setStatusCode(200);
+            response.setBooking(bookingDto);
+        }catch (Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+
+        return response;
     }
 
     private boolean roomIsAvailable(Booking bookingRequest, List<Booking> existingBookings) {
