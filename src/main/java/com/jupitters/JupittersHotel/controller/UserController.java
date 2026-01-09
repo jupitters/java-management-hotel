@@ -35,4 +35,10 @@ public class UserController {
         Response response = userService.getMyInfo(email);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+    @GetMapping("/{userId}/bookings")
+    public ResponseEntity<Response> getUserBookingHistory(@PathVariable Long userId){
+        Response response = userService.getUserBookingHistory(userId);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 }
