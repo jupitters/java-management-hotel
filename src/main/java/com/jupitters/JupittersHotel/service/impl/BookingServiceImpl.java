@@ -1,5 +1,6 @@
 package com.jupitters.JupittersHotel.service.impl;
 
+import com.jupitters.JupittersHotel.dto.BookingDto;
 import com.jupitters.JupittersHotel.dto.Response;
 import com.jupitters.JupittersHotel.exception.ResourceNotFoundException;
 import com.jupitters.JupittersHotel.model.Booking;
@@ -64,9 +65,10 @@ public class BookingServiceImpl implements BookingService {
         Response response = new Response();
 
         try {
-            Booking booking = bookingRepository.findByBookingConfirmationCode(confirmationCode);
+            Booking booking = bookingRepository.findByBookingConfirmationCode(confirmationCode).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
+            BookingDto bookingDto = Utils.mapBookingEntityToDto(booking);
             response.setStatusCode(200);
-            response.setBookingConfirmationCode(bookingConfirmation);
+            response.setBooking(bookingDto);
         }catch (Exception e){
             response.setStatusCode(500);
             response.setMessage(e.getMessage());
