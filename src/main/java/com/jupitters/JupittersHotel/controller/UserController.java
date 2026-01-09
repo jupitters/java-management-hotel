@@ -5,6 +5,8 @@ import com.jupitters.JupittersHotel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,9 +28,11 @@ public class UserController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
-    @DeleteMapping("/{userId}/id")
-    public ResponseEntity<Response> deleteUserById(@PathVariable Long userId){
-        Response response = userService.deleteUser(userId);
+    @DeleteMapping("/{userId}/id/info")
+    public ResponseEntity<Response> getProfileInfo(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Response response = userService.getMyInfo(email);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 }
