@@ -79,7 +79,19 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Response getAllBookings() {
-        return null;
+        Response response = new Response();
+
+        try {
+            List<Booking> bookings = bookingRepository.findAll();
+            List<BookingDto> bookingsDto = Utils.mapBookingListToDto(bookings);
+            response.setStatusCode(200);
+            response.setBookingList(bookingsDto);
+        }catch (Exception e){
+            response.setStatusCode(500);
+            response.setMessage(e.getMessage());
+        }
+
+        return response;
     }
 
     @Override
