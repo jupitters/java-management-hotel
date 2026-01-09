@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rooms")
@@ -42,5 +43,10 @@ public class RoomController {
     public ResponseEntity<Response> getAllRooms() {
         Response response = roomService.getAllRooms();
         return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
+    @GetMapping("/types")
+    public List<String> getRoomTypes() {
+        return roomService.getAllRoomTypes();
     }
 }
