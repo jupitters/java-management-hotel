@@ -1,5 +1,6 @@
 package com.jupitters.JupittersHotel.controller;
 
+import com.jupitters.JupittersHotel.dto.LoginRequest;
 import com.jupitters.JupittersHotel.dto.Response;
 import com.jupitters.JupittersHotel.model.User;
 import com.jupitters.JupittersHotel.service.UserService;
@@ -19,6 +20,12 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Response> register(@RequestBody User user){
         Response response = userService.register(user);
-        return ResponseEntity.status(response.getStatusCode());
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
+    @PostMapping("/relogingister")
+    public ResponseEntity<Response> login(@RequestBody LoginRequest loginRequest){
+        Response response = userService.login(loginRequest);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 }
