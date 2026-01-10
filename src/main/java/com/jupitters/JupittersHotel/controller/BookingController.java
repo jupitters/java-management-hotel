@@ -24,7 +24,12 @@ public class BookingController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
-
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Response> getAllBookings() {
+        Response response = bookingService.getAllBookings();
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 
     @GetMapping("/{confirmationCode}/confirmation")
     public ResponseEntity<Response> getBookingByConfirmationCode(@PathVariable String confirmationCode) {
