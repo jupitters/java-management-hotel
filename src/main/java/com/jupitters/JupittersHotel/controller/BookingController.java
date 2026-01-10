@@ -14,7 +14,15 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @PostMapping("/{roomId}/{userId}/book")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    public ResponseEntity<Response> saveBookings(@PathVariable Long roomId,
+                                                 @PathVariable Long userId,
+                                                 @RequestBody Booking bookingRequest) {
 
+        Response response = bookingService.saveBooking(roomId, userId, bookingRequest);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")
