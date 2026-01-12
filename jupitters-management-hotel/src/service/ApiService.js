@@ -132,4 +132,11 @@ export default class ApiService {
         const result = await axios.get(`${this.BASE_URL}/bookings/get-by-confirmation-code/${bookingCode}`)
         return result.data
     }
+
+    static async cancelBooking(bookingId) {
+        const result = await axios.delete(`${this.BASE_URL}/bookings/cancel/${bookingId}`, {
+            headers: this.getHeader()
+        })
+        return result.data
+    }
 }
