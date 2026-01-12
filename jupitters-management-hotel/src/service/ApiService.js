@@ -15,4 +15,9 @@ export default class ApiService {
         const response = await axios.post(`${this.BASE_URL}/auth/register`, registration)
         return response.data
     }
+
+    static async loginUser(loginDetails) {
+        const response = await axios.post(`${this.BASE_URL}/auth/login`, loginDetails)
+        return response.data
+    }
 }
