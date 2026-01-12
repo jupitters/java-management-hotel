@@ -93,4 +93,11 @@ export default class ApiService {
         const result = await axios.get(`${this.BASE_URL}/rooms/room-by-id/${roomId}`)
         return result.data
     }
+
+    static async deleteRoom(roomId) {
+        const result = await axios.delete(`${this.BASE_URL}/rooms/delete/${roomId}`, {
+            headers: this.getHeader()
+        })
+        return result.data
+    }
 }
