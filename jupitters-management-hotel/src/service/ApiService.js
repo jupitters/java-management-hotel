@@ -139,4 +139,9 @@ export default class ApiService {
         })
         return result.data
     }
+
+    static logout() {
+        localStorage.removeItem('token')
+        localStorage.removeItem('role')
+    }
 }
