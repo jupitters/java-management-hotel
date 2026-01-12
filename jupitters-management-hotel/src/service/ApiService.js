@@ -20,4 +20,11 @@ export default class ApiService {
         const response = await axios.post(`${this.BASE_URL}/auth/login`, loginDetails)
         return response.data
     }
+
+    static async getAllUsers() {
+        const response = await axios.get(`${this.BASE_URL}/users/all`, {
+            headers: this.getHeader()
+        })
+        return response.data
+    }
 }
