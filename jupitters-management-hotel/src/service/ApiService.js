@@ -83,4 +83,9 @@ export default class ApiService {
         const response = await axios.get(`${this.BASE_URL}/rooms/types`)
         return response.data
     }
+
+    static async getAllRooms() {
+        const result = await axios.get(`${this.BASE_URL}/rooms/all`)
+        return result.data
+    }
 }
