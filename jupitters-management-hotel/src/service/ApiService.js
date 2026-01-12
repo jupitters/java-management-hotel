@@ -100,4 +100,14 @@ export default class ApiService {
         })
         return result.data
     }
+
+    static async updateRoom(roomId, formData) {
+        const result = await axios.put(`${this.BASE_URL}/rooms/update/${roomId}`, formData, {
+            headers: {
+                ...this.getHeader(),
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return result.data;
+    }
 }
