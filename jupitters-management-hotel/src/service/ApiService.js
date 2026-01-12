@@ -154,4 +154,9 @@ export default class ApiService {
         const role = localStorage.getItem('role')
         return role === 'ADMIN'
     }
+
+    static isUser() {
+        const role = localStorage.getItem('role')
+        return role === 'USER'
+    }
 }
