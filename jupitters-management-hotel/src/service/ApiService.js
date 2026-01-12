@@ -120,4 +120,11 @@ export default class ApiService {
         })
         return response.data
     }
+
+    static async getAllBookings() {
+        const result = await axios.get(`${this.BASE_URL}/bookings/all`, {
+            headers: this.getHeader()
+        })
+        return result.data
+    }
 }
