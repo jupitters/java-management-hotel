@@ -10,4 +10,9 @@ export default class ApiService {
             "Content-Type": "application/json"
         };
     }
+
+    static async registerUser(registration) {
+        const response = await axios.post(`${this.BASE_URL}/auth/register`, registration)
+        return response.data
+    }
 }
