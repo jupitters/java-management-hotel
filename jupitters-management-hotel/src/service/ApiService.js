@@ -41,4 +41,11 @@ export default class ApiService {
         })
         return response.data
     }
+
+    static async getUserBookings(userId) {
+        const response = await axios.get(`${this.BASE_URL}/users/get-user-bookings/${userId}`, {
+            headers: this.getHeader()
+        })
+        return response.data
+    }
 }
