@@ -15,6 +15,13 @@ const HomePage = () => {
                 </div>
             </header>
         </section>
+
+        <RoomSearch handleSearchResult={handleSearchResult} />
+        <RoomResult roomSearchResults={roomSearchResults} />
+
+        <h4><a className="view-rooms-home" href="/rooms">All Rooms</a></h4>
+
+        <h2 className="home-services">Services at <span className="phegon-color">Phegon Hotel</span></h2>
     </div>
   )
 }
