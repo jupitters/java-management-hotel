@@ -8,9 +8,9 @@ const Navbar = () => {
     const isUser = ApiService.isUser();
 
   return (
-    <nav>
-        <div>
-
+    <nav className='navbar'>
+        <div className='navbar-brand'>
+            <NavLink to="/home"> Hotel</NavLink>
         </div>
         <ul>
             <li><NavLink to="/home" activeClass="active"> Home</NavLink></li>
