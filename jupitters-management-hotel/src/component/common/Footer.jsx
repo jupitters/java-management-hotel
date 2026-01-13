@@ -3,8 +3,8 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer>
-        <span>
-            Hotel | All Rights Reserved &copy; {new Date().getFullYear}
+        <span className='my-footer'>
+            Hotel | All Rights Reserved &copy; {new Date().getFullYear()}
         </span>
     </footer>
   )
