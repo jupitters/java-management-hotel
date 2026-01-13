@@ -7,6 +7,13 @@ const Navbar = () => {
     const isAdmin = ApiService.isAdmin();
     const isUser = ApiService.isUser();
 
+    const handleLogout = () => {
+        const isLogout = window.confirm("Are you sure you really want to logout?");
+        if(isLogout){
+            ApiService.logout();
+        }
+    }
+
   return (
     <nav className='navbar'>
         <div className='navbar-brand'>
