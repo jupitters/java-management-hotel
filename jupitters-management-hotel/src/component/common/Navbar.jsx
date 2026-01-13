@@ -1,5 +1,6 @@
 import React from 'react'
 import ApiService from '../../service/ApiService'
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     const isAuthenticated = ApiService.isAuthenticated();
@@ -7,7 +8,14 @@ const Navbar = () => {
     const isUser = ApiService.isUser();
 
   return (
-    <div>Navbar</div>
+    <nav>
+        <div>
+
+        </div>
+        <ul>
+            <li><NavLink to="/home"> Home</NavLink></li>
+        </ul>
+    </nav>
   )
 }
 
