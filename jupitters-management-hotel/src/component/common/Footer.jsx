@@ -2,7 +2,11 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer>
+        <span>
+            Hotel | All Rights Reserved &copy; {new Date().getFullYear}
+        </span>
+    </footer>
   )
 }
 
