@@ -1,16 +1,18 @@
 import React from 'react'
 import ApiService from '../../service/ApiService'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const isAuthenticated = ApiService.isAuthenticated();
     const isAdmin = ApiService.isAdmin();
     const isUser = ApiService.isUser();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         const isLogout = window.confirm("Are you sure you really want to logout?");
         if(isLogout){
             ApiService.logout();
+            navigate("/home")
         }
     }
 
