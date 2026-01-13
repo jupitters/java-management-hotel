@@ -23,7 +23,7 @@ const Navbar = () => {
             { !isAuthenticated && <li><NavLink to="/login" activeClass="active"> Login</NavLink></li>}
             { isAuthenticated && <li><NavLink to="/register" activeClass="active"> Register</NavLink></li>}
 
-            <li> Logout</li>
+            { isAuthenticated && <li onClick={handleLogout}> Logout</li>}
         </ul>
     </nav>
   )
