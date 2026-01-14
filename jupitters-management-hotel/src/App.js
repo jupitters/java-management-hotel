@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './component/common/Navbar'/;
-import { BrowserRouter } from 'react-router-dom';
+import Navbar from './component/common/Navbar';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './component/home/HomePage';
 
 function App() {
@@ -10,7 +10,9 @@ function App() {
       <div className='App'>
         <Navbar />
         <div className='content'>
-          <Route exact path='/home' element={<HomePage />} />
+          <Routes >
+            <Route exact path='/home' element={<HomePage />} />
+          </Routes>
         </div>
         <Footer />
       </div>
