@@ -33,6 +33,15 @@ const RoomSearch = ({ handleSearchResult }) => {
             setError("Please, select all fields.")
             return false;
         }
+
+        try{
+            const formattedStartDate = startDate ? startDate.toISOString().split('T')[0] : null;
+            const formattedEndDate = endDate ? endDate.toISOString().split('T')[0] : null;
+
+            const response = await ApiService.getAllAvailableRooms(formattedStartDate, formattedEndDate, roomType);
+        }catch(err){
+            showError(err.response.data.message);
+        }
     }
 
   return (
