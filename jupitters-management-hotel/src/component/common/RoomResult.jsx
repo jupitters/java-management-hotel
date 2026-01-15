@@ -17,6 +17,24 @@ const RoomResult = ({ roomSearchResults }) => {
                                 <p>Price: ${room.roomPrice} / night</p>
                                 <p>Description: {room.roomDescription}</p>
                             </div>
+
+                            <div className='book-now-div'>
+                                {isAdmin ? (
+                                    <button
+                                        className="edit-room-button"
+                                        onClick={() => navigate(`/admin/edit-room/${room.id}`)}
+                                    >
+                                        Edit Room
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="book-now-button"
+                                        onClick={() => navigate(`/room-details-book/${room.id}`)}
+                                    >
+                                        View/Book Now
+                                    </button>
+                                )}
+                            </div>
                     </div>
                 ))}
             </div>
