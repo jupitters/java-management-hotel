@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import RoomSearch from '../common/RoomSearch'
 
 const HomePage = () => {
+    const [romSearchResults, setRoomSearchResults] = useState([]);
+    const handleSearchResult = (results) => {
+        setRoomSearchResults(results);
+    }
+
   return (
     <div>
         <section>
@@ -15,6 +21,8 @@ const HomePage = () => {
                 </div>
             </header>
         </section>
+
+        <RoomSearch handleSearchResult={handleSearchResult}/>
 
         <h4><a className="view-rooms-home" href="/rooms">All Rooms</a></h4>
 
