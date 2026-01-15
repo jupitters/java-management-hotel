@@ -28,7 +28,18 @@ const RoomSearch = ({ handleSearchResult }) => {
     };
 
   return (
-    <div>RoomSearch</div>
+    <section>
+        <div className='search-container'>
+            <div className='search-field'>
+                <label>Check-In Date</label>
+                <DatePicker 
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="Select Check-In Date"/>
+            </div>
+        </div>
+    </section>
   )
 }
 
