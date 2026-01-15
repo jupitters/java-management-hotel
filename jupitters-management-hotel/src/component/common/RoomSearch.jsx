@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ApiService from '../../service/ApiService';
+import DatePicker from 'react-datepicker';
 
 const RoomSearch = ({ handleSearchResult }) => {
     const [startDate, setStartDate] = useState(null);
@@ -36,7 +37,17 @@ const RoomSearch = ({ handleSearchResult }) => {
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     dateFormat="dd/MM/yyyy"
-                    placeholderText="Select Check-In Date"/>
+                    placeholderText="Select Check-In Date"
+                />
+            </div>
+            <div className='search-field'>
+                <label>Check-Out Date</label>
+                <DatePicker 
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="Select Check-Out Date"
+                />
             </div>
         </div>
     </section>
