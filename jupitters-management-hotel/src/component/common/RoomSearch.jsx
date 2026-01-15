@@ -62,7 +62,11 @@ const RoomSearch = ({ handleSearchResult }) => {
                     ))}
                 </select>
             </div>
+            <button className='home-search-button' onClick={handleInternalSearch}>
+                Search Rooms
+            </button>
         </div>
+        {error && <p className='error-message'>{error}</p>}
     </section>
   )
 }
