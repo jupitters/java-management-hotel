@@ -20,6 +20,13 @@ const RoomSearch = ({ handleSearchResult }) => {
         fetchRoomTypes(); 
     }, [])
 
+    const showError = (message, timeOut = 5000) => {
+        setError(message);
+        setTimeout(() => {
+            setError('');
+        }, timeOut)
+    };
+
   return (
     <div>RoomSearch</div>
   )
