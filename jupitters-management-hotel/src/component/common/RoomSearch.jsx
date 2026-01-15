@@ -28,6 +28,13 @@ const RoomSearch = ({ handleSearchResult }) => {
         }, timeOut)
     };
 
+    const handleInternalSearch = async () => {
+        if(!startDate || !endDate || !roomType){
+            setError("Please, select all fields.")
+            return false;
+        }
+    }
+
   return (
     <section>
         <div className='search-container'>
