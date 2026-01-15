@@ -30,7 +30,7 @@ const Navbar = () => {
             { isAdmin && <li><NavLink to="/admin" activeclass="active"> Admin</NavLink></li> }
             
             { !isAuthenticated && <li><NavLink to="/login" activeclass="active"> Login</NavLink></li>}
-            { isAuthenticated && <li><NavLink to="/register" activeclass="active"> Register</NavLink></li>}
+            { !isAuthenticated && <li><NavLink to="/register" activeclass="active"> Register</NavLink></li>}
 
             { isAuthenticated && <li onClick={handleLogout}> Logout</li>}
         </ul>
