@@ -10,7 +10,11 @@ const Pagination = ({ roomsPerPage, totalRooms, currentPage, paginate }) => {
     <div className='pagination-nav'>
       <ul className='pagination-ul'>
         {Pagination.map((number) => (
-          <li key={number} className='pagination-li'></li>
+          <li key={number} className='pagination-li'>
+            <button className={`pagination-button ${currentPage === number ? 'curret-page' : ''}`}>
+              {number}
+            </button>
+          </li>
         ))}
       </ul>
     </div>
