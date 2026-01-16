@@ -55,6 +55,12 @@ const AllRoomsPage = () => {
     setCurrentPage(1); // Reset to first page after filtering
   };
 
+  const indexOfLastRoom = currentPage * roomsPerPage;
+  const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
+  const currentRooms = filteredRooms.slice(indexOfFirstRoom, indexOfLastRoom);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>AllRoomsPage</div>
   )
