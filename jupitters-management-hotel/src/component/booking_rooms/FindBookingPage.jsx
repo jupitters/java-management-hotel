@@ -37,6 +37,35 @@ const FindBookingPage = () => {
             <button onClick={handleSearch}>Find</button>
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
+        {bookingDetails && (
+            <div className="booking-details">
+                <h3>Booking Details</h3>
+                <p>Confirmation Code: {bookingDetails.bookingConfirmationCode}</p>
+                <p>Check-in Date: {bookingDetails.checkInDate}</p>
+                <p>Check-out Date: {bookingDetails.checkOutDate}</p>
+                <p>Num Of Adults: {bookingDetails.numOfAdults}</p>
+                <p>Num Of Children: {bookingDetails.numOfChildren}</p>
+
+                <br />
+                <hr />
+                <br />
+                <h3>Booker Detials</h3>
+                <div>
+                    <p> Name: {bookingDetails.user.name}</p>
+                    <p> Email: {bookingDetails.user.email}</p>
+                    <p> Phone Number: {bookingDetails.user.phoneNumber}</p>
+                </div>
+
+                <br />
+                <hr />
+                <br />
+                <h3>Room Details</h3>
+                <div>
+                    <p> Room Type: {bookingDetails.room.roomType}</p>
+                    <img src={bookingDetails.room.roomPhotoUrl} alt="" sizes="" srcSet="" />
+                </div>
+            </div>
+        )}
     </div>
   )
 }
