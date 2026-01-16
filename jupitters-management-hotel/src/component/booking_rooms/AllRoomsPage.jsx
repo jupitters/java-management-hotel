@@ -62,7 +62,20 @@ const AllRoomsPage = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>AllRoomsPage</div>
+    <div className='all-rooms'>
+      <h2>All Rooms</h2>
+      <div className='all-room-filter-div'>
+        <label>Filter by Room Type:</label>
+        <select value={selectedRoomType} onChange={handleRoomTypeChange}>
+          <option value="">All</option>
+          {roomTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
   )
 }
 
