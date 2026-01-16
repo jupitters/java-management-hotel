@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import ApiService from '../../service/ApiService';
+import RoomSearch from '../common/RoomSearch';
+import RoomResult from '../common/RoomResult';
+import Pagination from '../common/Pagination';
 
 const AllRoomsPage = () => {
     const [rooms, setRooms] = useState([]);
@@ -75,6 +78,16 @@ const AllRoomsPage = () => {
           ))}
         </select>
       </div>
+
+      <RoomSearch handleSearchResult={handleSearchResult} />
+      <RoomResult roomSearchResults={currentRooms} />
+
+      <Pagination
+        roomsPerPage={roomsPerPage}
+        totalRooms={filteredRooms.length}
+        currentPage={currentPage}
+        paginate={paginate}
+      />
     </div>
   )
 }
