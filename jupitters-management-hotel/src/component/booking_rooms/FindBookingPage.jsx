@@ -36,6 +36,7 @@ const FindBookingPage = () => {
             />
             <button onClick={handleSearch}>Find</button>
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   )
 }
