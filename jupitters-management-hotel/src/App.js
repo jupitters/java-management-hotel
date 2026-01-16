@@ -12,6 +12,7 @@ function App() {
         <Navbar />
         <div className='content'>
           <Routes >
+            <Route exact path='/' element={<HomePage />} />
             <Route exact path='/home' element={<HomePage />} />
           </Routes>
         </div>
