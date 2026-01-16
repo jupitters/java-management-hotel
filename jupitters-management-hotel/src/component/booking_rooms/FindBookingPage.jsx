@@ -24,7 +24,19 @@ const FindBookingPage = () => {
     };
     
   return (
-    <div>FindBookingPage</div>
+    <div className="find-booking-page">
+        <h2>Find Booking</h2>
+        <div className="search-container">
+            <input
+                required
+                type="text"
+                placeholder="Enter your booking confirmation code"
+                value={confirmationCode}
+                onChange={(e) => setConfirmationCode(e.target.value)}
+            />
+            <button onClick={handleSearch}>Find</button>
+        </div>
+    </div>
   )
 }
 
