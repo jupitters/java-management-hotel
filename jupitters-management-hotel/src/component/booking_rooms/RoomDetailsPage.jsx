@@ -36,6 +36,33 @@ const RoomDetailsPage = () => {
     fetchData();
   }, [roomId]);
 
+  const handleConfirmBooking = async () => {
+    if (!checkInDate || !checkOutDate) {
+      setErrorMessage('Please select check-in and check-out dates.');
+      setTimeout(() => setErrorMessage(''), 5000);
+      return;
+    }
+
+    if (isNaN(numAdults) || numAdults < 1 || isNaN(numChildren) || numChildren < 0) {
+      setErrorMessage('Please enter valid numbers for adults and children.');
+      setTimeout(() => setErrorMessage(''), 5000);
+      return;
+    }
+
+    const oneDay = 24 * 60 * 60 * 1000; 
+    const startDate = new Date(checkInDate);
+    const endDate = new Date(checkOutDate);
+    const totalDays = Math.round(Math.abs((endDate - startDate) / oneDay)) + 1;
+
+    const totalGuests = numAdults + numChildren;
+
+    const roomPricePerNight = roomDetails.roomPrice;
+    const totalPrice = roomPricePerNight * totalDays;
+
+    setTotalPrice(totalPrice);
+    setTotalGuests(totalGuests);
+  }
+
   return (
     <div>RoomDetailsPage</div>
   )
