@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ApiService from '../../service/ApiService'
+import ApiService from '../../service/ApiService'; 
 import DatePicker from 'react-datepicker';
 
 const RoomDetailsPage = () => {
   const navigate = useNavigate();
-  const { roomId } = useParams();
+  const { roomId } = useParams(); 
   const [roomDetails, setRoomDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
   const [numAdults, setNumAdults] = useState(1);
-  const [numChildren, setNumChildren] = useState(0); 
+  const [numChildren, setNumChildren] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0); 
-  const [totalGuests, setTotalGuests] = useState(1); 
-  const [showDatePicker, setShowDatePicker] = useState(false); 
-  const [userId, setUserId] = useState('');
-  const [showMessage, setShowMessage] = useState(false); 
-  const [confirmationCode, setConfirmationCode] = useState(''); 
+  const [totalGuests, setTotalGuests] = useState(1);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [userId, setUserId] = useState(''); 
+  const [showMessage, setShowMessage] = useState(false);
+  const [confirmationCode, setConfirmationCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true); // Set loading state to true
+        setIsLoading(true); 
         const response = await ApiService.getRoomById(roomId);
         setRoomDetails(response.room);
         const userProfile = await ApiService.getUserProfile();
@@ -32,11 +32,12 @@ const RoomDetailsPage = () => {
       } catch (error) {
         setError(error.response?.data?.message || error.message);
       } finally {
-        setIsLoading(false); // Set loading state to false after fetching or error
+        setIsLoading(false);
       }
     };
     fetchData();
   }, [roomId]);
+
 
   const handleConfirmBooking = async () => {
     if (!checkInDate || !checkOutDate) {
@@ -63,10 +64,11 @@ const RoomDetailsPage = () => {
 
     setTotalPrice(totalPrice);
     setTotalGuests(totalGuests);
-  }
+  };
 
   const acceptBooking = async () => {
     try {
+
       const startDate = new Date(checkInDate);
       const endDate = new Date(checkOutDate);
 
@@ -75,6 +77,7 @@ const RoomDetailsPage = () => {
 
       const formattedCheckInDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
       const formattedCheckOutDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
 
       console.log("Formated Check-in Date:", formattedCheckInDate);
       console.log("Formated Check-out Date:", formattedCheckOutDate);
@@ -166,11 +169,51 @@ const RoomDetailsPage = () => {
               placeholderText="Check-in Date"
               dateFormat="dd/MM/yyyy"
             />
+            <DatePicker
+              className="detail-search-field"
+              selected={checkOutDate}
+              onChange={(date) => setCheckOutDate(date)}
+              selectsEnd
+              startDate={checkInDate}
+              endDate={checkOutDate}
+              minDate={checkInDate}
+              placeholderText="Check-out Date"
+              dateFormat="dd/MM/yyyy"
+            />
+
+            <div className='guest-container'>
+              <div className="guest-div">
+                <label>Adults:</label>
+                <input
+                  type="number"
+                  min="1"
+                  value={numAdults}
+                  onChange={(e) => setNumAdults(parseInt(e.target.value))}
+                />
+              </div>
+              <div className="guest-div">
+                <label>Children:</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={numChildren}
+                  onChange={(e) => setNumChildren(parseInt(e.target.value))}
+                />
+              </div>
+              <button className="confirm-booking" onClick={handleConfirmBooking}>Confirm Booking</button>
+            </div>
+          </div>
+        )}
+        {totalPrice > 0 && (
+          <div className="total-price">
+            <p>Total Price: ${totalPrice}</p>
+            <p>Total Guests: {totalGuests}</p>
+            <button onClick={acceptBooking} className="accept-booking">Accept Booking</button>
           </div>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RoomDetailsPage
+export default RoomDetailsPage;
