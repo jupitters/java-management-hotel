@@ -117,7 +117,13 @@ const RoomDetailsPage = () => {
   const { roomType, roomPrice, roomPhotoUrl, description, bookings } = roomDetails;
 
   return (
-    <div>RoomDetailsPage</div>
+    <div className="room-details-booking">
+      {showMessage && (
+        <p className="booking-success-message">
+          Booking successful! Confirmation code: {confirmationCode}. An SMS and email of your booking details have been sent to you.
+        </p>
+      )}
+    </div>
   )
 }
 
