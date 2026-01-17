@@ -102,6 +102,18 @@ const RoomDetailsPage = () => {
     }
   };
 
+  if (isLoading) {
+    return <p className='room-detail-loading'>Loading room details...</p>;
+  }
+
+  if (error) {
+    return <p className='room-detail-loading'>{error}</p>;
+  }
+
+  if (!roomDetails) {
+    return <p className='room-detail-loading'>Room not found.</p>;
+  }
+
   return (
     <div>RoomDetailsPage</div>
   )
