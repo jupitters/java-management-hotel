@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const RoomDetailsPage = () => {
@@ -18,6 +18,24 @@ const RoomDetailsPage = () => {
   const [showMessage, setShowMessage] = useState(false); 
   const [confirmationCode, setConfirmationCode] = useState(''); 
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true); // Set loading state to true
+        const response = await ApiService.getRoomById(roomId);
+        setRoomDetails(response.room);
+        const userProfile = await ApiService.getUserProfile();
+        setUserId(userProfile.user.id);
+      } catch (error) {
+        setError(error.response?.data?.message || error.message);
+      } finally {
+        setIsLoading(false); // Set loading state to false after fetching or error
+      }
+    };
+    fetchData();
+  }, [roomId]);
+
   return (
     <div>RoomDetailsPage</div>
   )
