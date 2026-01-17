@@ -114,6 +114,8 @@ const RoomDetailsPage = () => {
     return <p className='room-detail-loading'>Room not found.</p>;
   }
 
+  const { roomType, roomPrice, roomPhotoUrl, description, bookings } = roomDetails;
+
   return (
     <div>RoomDetailsPage</div>
   )
