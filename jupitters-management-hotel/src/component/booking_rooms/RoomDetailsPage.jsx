@@ -123,6 +123,11 @@ const RoomDetailsPage = () => {
           Booking successful! Confirmation code: {confirmationCode}. An SMS and email of your booking details have been sent to you.
         </p>
       )}
+      {errorMessage && (
+        <p className="error-message">
+          {errorMessage}
+        </p>
+      )}
     </div>
   )
 }
