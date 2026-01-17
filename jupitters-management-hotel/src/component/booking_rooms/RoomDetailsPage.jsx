@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ApiService from '../../service/ApiService'
 
 const RoomDetailsPage = () => {
   const navigate = useNavigate();
@@ -62,6 +63,44 @@ const RoomDetailsPage = () => {
     setTotalPrice(totalPrice);
     setTotalGuests(totalGuests);
   }
+
+  const acceptBooking = async () => {
+    try {
+      const startDate = new Date(checkInDate);
+      const endDate = new Date(checkOutDate);
+
+      console.log("Original Check-in Date:", startDate);
+      console.log("Original Check-out Date:", endDate);
+
+      const formattedCheckInDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+      const formattedCheckOutDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
+      console.log("Formated Check-in Date:", formattedCheckInDate);
+      console.log("Formated Check-out Date:", formattedCheckOutDate);
+
+      const booking = {
+        checkInDate: formattedCheckInDate,
+        checkOutDate: formattedCheckOutDate,
+        numOfAdults: numAdults,
+        numOfChildren: numChildren
+      };
+      console.log(booking)
+      console.log(checkOutDate)
+
+      const response = await ApiService.bookRoom(roomId, userId, booking);
+      if (response.statusCode === 200) {
+        setConfirmationCode(response.bookingConfirmationCode);
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+          navigate('/rooms');
+        }, 10000);
+      }
+    } catch (error) {
+      setErrorMessage(error.response?.data?.message || error.message);
+      setTimeout(() => setErrorMessage(''), 5000);
+    }
+  };
 
   return (
     <div>RoomDetailsPage</div>
