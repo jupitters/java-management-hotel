@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService'
+import DatePicker from 'react-datepicker';
 
 const RoomDetailsPage = () => {
   const navigate = useNavigate();
@@ -150,6 +151,24 @@ const RoomDetailsPage = () => {
           </ul>
         </div>
       )}
+      <div className="booking-info">
+        <button className="book-now-button" onClick={() => setShowDatePicker(true)}>Book Now</button>
+        <button className="go-back-button" onClick={() => setShowDatePicker(false)}>Go Back</button>
+        {showDatePicker && (
+          <div className="date-picker-container">
+            <DatePicker
+              className="detail-search-field"
+              selected={checkInDate}
+              onChange={(date) => setCheckInDate(date)}
+              selectsStart
+              startDate={checkInDate}
+              endDate={checkOutDate}
+              placeholderText="Check-in Date"
+              dateFormat="dd/MM/yyyy"
+            />
+          </div>
+        )}
+      </div>
     </div>
   )
 }
