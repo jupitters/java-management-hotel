@@ -32,6 +32,26 @@ const RegisterPage = () => {
     <div className="auth-container">
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>}
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+                <label>Phone Number:</label>
+                <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
+            </div>
+            <button type="submit">Register</button>
+        </form>
     </div>
   )
 }
