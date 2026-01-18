@@ -29,7 +29,10 @@ const RegisterPage = () => {
 
 
   return (
-    <div>RegisterPage</div>
+    <div className="auth-container">
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+    </div>
   )
 }
 
