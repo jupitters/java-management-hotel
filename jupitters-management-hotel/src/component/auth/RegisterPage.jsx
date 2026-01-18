@@ -14,7 +14,12 @@ const RegisterPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    
+     const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+
   return (
     <div>RegisterPage</div>
   )
