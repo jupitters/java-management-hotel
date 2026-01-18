@@ -19,6 +19,14 @@ const RegisterPage = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const validateForm = () => {
+        const { name, email, password, phoneNumber } = formData;
+        if (!name || !email || !password || !phoneNumber) {
+            return false;
+        }
+        return true;
+    };
+
 
   return (
     <div>RegisterPage</div>
