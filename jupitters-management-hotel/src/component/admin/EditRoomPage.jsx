@@ -33,6 +33,72 @@ const EditRoomPage = () => {
         fetchRoomDetails();
     }, [roomId]);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setRoomDetails(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+            setPreview(URL.createObjectURL(selectedFile));
+        } else {
+            setFile(null);
+            setPreview(null);
+        }
+    };
+
+    const handleUpdate = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('roomType', roomDetails.roomType);
+            formData.append('roomPrice', roomDetails.roomPrice);
+            formData.append('roomDescription', roomDetails.roomDescription);
+
+            if (file) {
+                formData.append('photo', file);
+            }
+
+            const result = await ApiService.updateRoom(roomId, formData);
+            if (result.statusCode === 200) {
+                setSuccess('Room updated successfully.');
+                
+                setTimeout(() => {
+                    setSuccess('');
+                    navigate('/admin/manage-rooms');
+                }, 3000);
+            }
+            setTimeout(() => setSuccess(''), 5000);
+        } catch (error) {
+            setError(error.response?.data?.message || error.message);
+            setTimeout(() => setError(''), 5000);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (window.confirm('Do you want to delete this room?')) {
+            try {
+                const result = await ApiService.deleteRoom(roomId);
+                if (result.statusCode === 200) {
+                    setSuccess('Room Deleted successfully.');
+                    
+                    setTimeout(() => {
+                        setSuccess('');
+                        navigate('/admin/manage-rooms');
+                    }, 3000);
+                }
+            } catch (error) {
+                setError(error.response?.data?.message || error.message);
+                setTimeout(() => setError(''), 5000);
+            }
+        }
+    };
+
+
   return (
     <div>EditRoomPage</div>
   )
