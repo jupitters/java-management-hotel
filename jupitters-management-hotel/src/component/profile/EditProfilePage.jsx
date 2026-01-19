@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import ApiService from '../../service/ApiService';
 
 const EditProfilePage = () => {
+    const [user, setUser] = useState(null);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await ApiService.getUserProfile();
+                setUser(response.user);
+            } catch (error) {
+                setError(error.message);
+            }
+        };
+
+        fetchUserProfile();
+    }, []);
+
   return (
     <div>EditProfilePage</div>
   )
