@@ -8,6 +8,7 @@ import FindBookingPage from './component/booking_rooms/FindBookingPage';
 import RoomDetailsPage from './component/booking_rooms/RoomDetailsPage';
 import LoginPage from './component/auth/LoginPage';
 import RegisterPage from './component/auth/RegisterPage';
+import ProfilePage from './component/profile/ProfilePage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path='/room-details/:roomId' element={<RoomDetailsPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
+            <Route path='/profile' element={<ProfilePage />} />
           </Routes>
         </div>
         <Footer />
