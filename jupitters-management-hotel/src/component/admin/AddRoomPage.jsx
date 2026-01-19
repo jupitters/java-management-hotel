@@ -30,6 +30,23 @@ const AddRoomPage = () => {
         fetchRoomTypes();
     }, []);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setRoomDetails(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleRoomTypeChange = (e) => {
+        if (e.target.value === 'new') {
+            setNewRoomType(true);
+            setRoomDetails(prevState => ({ ...prevState, roomType: '' }));
+        } else {
+            setNewRoomType(false);
+            setRoomDetails(prevState => ({ ...prevState, roomType: e.target.value }));
+        }
+    };
 
 
   return (
