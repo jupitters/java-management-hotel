@@ -20,6 +20,18 @@ const EditProfilePage = () => {
         fetchUserProfile();
     }, []);
 
+    const handleDeleteProfile = async () => {
+        if (!window.confirm('Are you sure you want to delete your account?')) {
+            return;
+        }
+        try {
+            await ApiService.deleteUser(user.id);
+            navigate('/signup');
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
   return (
     <div>EditProfilePage</div>
   )
