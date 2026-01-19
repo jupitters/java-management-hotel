@@ -33,7 +33,10 @@ const EditProfilePage = () => {
     };
 
   return (
-    <div>EditProfilePage</div>
+    <div className="edit-profile-page">
+        <h2>Edit Profile</h2>
+        {error && <p className="error-message">{error}</p>}
+    </div>
   )
 }
 
