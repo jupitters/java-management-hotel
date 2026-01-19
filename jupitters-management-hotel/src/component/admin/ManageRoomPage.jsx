@@ -48,9 +48,15 @@ const ManageRoomPage = () => {
       const filtered = rooms.filter((room) => room.roomType === type);
       setFilteredRooms(filtered);
     }
-    setCurrentPage(1); // Reset to first page after filtering
+    setCurrentPage(1);
   };
-    
+
+  const indexOfLastRoom = currentPage * roomsPerPage;
+  const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
+  const currentRooms = filteredRooms.slice(indexOfFirstRoom, indexOfLastRoom);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>ManageRoomPage</div>
   )
