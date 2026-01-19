@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './component/common/Navbar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './component/home/HomePage';
 import Footer from './component/common/Footer';
 import AllRoomsPage from './component/booking_rooms/AllRoomsPage';
@@ -20,7 +20,6 @@ function App() {
         <Navbar />
         <div className='content'>
           <Routes >
-            <Route exact path='/' element={<HomePage />} />
             <Route exact path='/home' element={<HomePage />} />
             <Route exact path='/rooms' element={<AllRoomsPage />} />
             <Route path='/find-booking' element={<FindBookingPage />} />
@@ -30,6 +29,8 @@ function App() {
             <Route path='/room-details/:roomId' element={<ProtectedRoute element={<RoomDetailsPage />} />} />
             <Route path='/profile' element={<ProtectedRoute element={<ProfilePage />} />} />
             <Route path='/edit-profile' element={<ProtectedRoute element={<EditProfilePage />} />} />
+
+            <Route path='*' element={<Navigate to="/home" />} />
           </Routes>
         </div>
         <Footer />
