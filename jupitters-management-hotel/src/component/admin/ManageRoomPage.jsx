@@ -58,7 +58,25 @@ const ManageRoomPage = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>ManageRoomPage</div>
+    <div className='all-rooms'>
+        <h2>All Rooms</h2>
+        <div className='all-room-filter-div' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className='filter-select-div'>
+            <label>Filter by Room Type:</label>
+            <select value={selectedRoomType} onChange={handleRoomTypeChange}>
+                <option value="">All</option>
+                {roomTypes.map((type) => (
+                <option key={type} value={type}>
+                    {type}
+                </option>
+                ))}
+            </select>
+            <button className='add-room-button' onClick={() => navigate('/admin/add-room')}>
+                Add Room
+            </button>
+        </div>
+      </div>
+    </div>
   )
 }
 
