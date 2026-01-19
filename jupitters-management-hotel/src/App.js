@@ -9,6 +9,7 @@ import RoomDetailsPage from './component/booking_rooms/RoomDetailsPage';
 import LoginPage from './component/auth/LoginPage';
 import RegisterPage from './component/auth/RegisterPage';
 import ProfilePage from './component/profile/ProfilePage';
+import EditProfilePage from './component/profile/EditProfilePage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/edit-profile' element={<EditProfilePage />} />
           </Routes>
         </div>
         <Footer />
