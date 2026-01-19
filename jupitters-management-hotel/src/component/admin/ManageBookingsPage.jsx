@@ -25,6 +25,22 @@ const ManageBookingsPage = () => {
         fetchBookings();
     }, []);
 
+    useEffect(() => {
+        filterBookings(searchTerm);
+    }, [searchTerm, bookings]);
+
+    const filterBookings = (term) => {
+        if (term === '') {
+            setFilteredBookings(bookings);
+        } else {
+            const filtered = bookings.filter((booking) =>
+                booking.bookingConfirmationCode && booking.bookingConfirmationCode.toLowerCase().includes(term.toLowerCase())
+            );
+            setFilteredBookings(filtered);
+        }
+        setCurrentPage(1);
+    };
+
   return (
     <div>ManageBookingsPage</div>
   )
