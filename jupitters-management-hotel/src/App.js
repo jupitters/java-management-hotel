@@ -10,6 +10,7 @@ import LoginPage from './component/auth/LoginPage';
 import RegisterPage from './component/auth/RegisterPage';
 import ProfilePage from './component/profile/ProfilePage';
 import EditProfilePage from './component/profile/EditProfilePage';
+import { ProtectedRoute, AdminRoute } from './service/guard'
 
 
 function App() {
@@ -23,11 +24,12 @@ function App() {
             <Route exact path='/home' element={<HomePage />} />
             <Route exact path='/rooms' element={<AllRoomsPage />} />
             <Route path='/find-booking' element={<FindBookingPage />} />
-            <Route path='/room-details/:roomId' element={<RoomDetailsPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
-            <Route path='/profile' element={<ProfilePage />} />
-            <Route path='/edit-profile' element={<EditProfilePage />} />
+
+            <Route path='/room-details/:roomId' element={<ProtectedRoute element={<RoomDetailsPage />} />} />
+            <Route path='/profile' element={<ProtectedRoute element={<ProfilePage />} />} />
+            <Route path='/edit-profile' element={<ProtectedRoute element={<EditProfilePage />} />} />
           </Routes>
         </div>
         <Footer />
